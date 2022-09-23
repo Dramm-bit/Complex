@@ -1,11 +1,14 @@
 package com.residence.api.models;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,5 +26,8 @@ public class Residence {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
+
+    @OneToMany(mappedBy = "house_id")
+    private Set<House> house;
 
 }
