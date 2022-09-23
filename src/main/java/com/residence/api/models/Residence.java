@@ -21,7 +21,7 @@ public class Residence {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_payment_config")
+    @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
 
 }

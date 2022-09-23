@@ -25,11 +25,11 @@ public class Payment {
     private StatePayment status;
 
     @ManyToOne()
-    @JoinColumn(name = "id_house")
+    @JoinColumn(name = "house_id")
     private House house;
 
     @ManyToOne()
-    @JoinColumn(name = "id_payment_config")
+    @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
 
 }
