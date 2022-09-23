@@ -9,6 +9,5 @@ import com.residence.api.models.Payment;
 @Repository
 
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
-    List<Payment> findAll();
     
 }
