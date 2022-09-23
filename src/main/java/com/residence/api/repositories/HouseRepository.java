@@ -9,6 +9,5 @@ import com.residence.api.models.House;
 @Repository
 
 public interface HouseRepository extends JpaRepository<House, Long> {
-    public List<House> findAll();
     
 }

@@ -27,7 +27,7 @@ public class Residence {
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
 
-    @OneToMany(mappedBy = "house_id")
+    @OneToMany(mappedBy = "residence")
     private Set<House> house;
 
 }
