@@ -1,6 +1,7 @@
 package com.residence.api.services;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class ResidenceService {
         return residenceRepository.findById(id);
         
         
+    }
+
+    public List<Residence> getResidences() {
+        
+        return this.residenceRepository.findAll();
     }
     
 }
