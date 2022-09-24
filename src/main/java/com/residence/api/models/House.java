@@ -21,4 +21,6 @@ public class House {
     @ManyToOne()
     @JoinColumn(name = "residence_id")
     private Residence residence;
+    
+    private String tower;
 }

@@ -21,16 +21,19 @@ import lombok.Data;
 @Data
 public class Residence {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
-    
+
     @JsonIgnore()
     @OneToMany(mappedBy = "residence")
     private Set<House> house;
 
+    private String name;
+    
+    private String address;
 }
