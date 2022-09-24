@@ -26,4 +26,5 @@ public class PaymentConfig {
     @OneToOne(mappedBy = "paymentConfig")
     private Residence residence;
 
+    private Double amount;
 }

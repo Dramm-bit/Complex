@@ -2,7 +2,7 @@ package com.residence.api.services;
 
 
 
-import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.residence.api.dtos.HouseDTO;
+
 import com.residence.api.models.House;
 import com.residence.api.models.Residence;
 import com.residence.api.repositories.HouseRepository;
@@ -37,7 +37,7 @@ public class HouseService {
    
         House newHouse = new House();
         Optional<Residence> residenceFound = this.residenceRepository.findById(residenceId);
-        
+
         if(residenceFound.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residence not found");
         newHouse.setResidence(residenceFound.get());
         newHouse.setTower(houseData.getTower());

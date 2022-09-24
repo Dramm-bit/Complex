@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.residence.api.dataTranferObjects.HouseDTO;
+import com.residence.api.dataTranferObjects.ResidenceDTO;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.residence.api.dataTranferObjects.HouseDTO;
 import com.residence.api.models.House;
 import com.residence.api.models.Residence;
 import com.residence.api.services.HouseService;
@@ -29,12 +30,11 @@ import com.residence.api.services.ResidenceService;
 @RequestMapping("/api/v1/residences")
 public class ResidenceController {
     @Autowired
-   private final HouseService houseService;
-   
+   private  HouseService houseService;
 
+   @Autowired
+   private ResidenceService residenceService;
 
-    @Autowired
-    ResidenceService residenceService;
     
     @GetMapping("/{residence_id}/house/{id}")
     public ResponseEntity<Object> findHouseById(@PathVariable("residence_id") Long residenceId,@PathVariable("id") Long id) {
@@ -70,4 +70,22 @@ public class ResidenceController {
         return ResponseEntity.ok().body(response);
     }
 
+
+    @PostMapping
+    public ResponseEntity<Residence> createResidence(@RequestBody() ResidenceDTO residenceData){
+
+        Residence newResidence = this.residenceService.createResidence(residenceData);
+
+        return ResponseEntity.ok().body(newResidence);
+
+    }
+    
+
 }
+
+ 
+    
+    
+
+   
+

@@ -14,17 +14,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Builder;
 import lombok.Data;
 
 
 @Entity
 @Table(name = "residences")
 @Data
-@Builder
 public class Residence {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String address;
@@ -38,6 +36,8 @@ public class Residence {
     private Set<House> houses;
 
     private String name;
+
+    
     
     
 }
