@@ -29,8 +29,7 @@ public class ResidenceService {
      * }
      */
 
-  }
-
+     
     public List<Residence> getResidences() {
         
         return this.residenceRepository.findAll();
@@ -51,6 +50,9 @@ public class ResidenceService {
     }
 
 
+  }
+
+
    /*  public Set<House> findResidenceById(Long id) {
 
         List<House> finded = new ArrayList<>();
@@ -61,4 +63,4 @@ public class ResidenceService {
     } */
 
   
-}
+
