@@ -1,6 +1,7 @@
 package com.residence.api.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.residence.api.dtos.HouseDTO;
+import com.residence.api.dataTranferObjects.HouseDTO;
 import com.residence.api.models.House;
+import com.residence.api.models.Residence;
 import com.residence.api.services.HouseService;
+import com.residence.api.services.ResidenceService;
 
 @RestController
 @RequestMapping("/api/v1/residences")
@@ -25,6 +28,9 @@ public class ResidenceController {
     @Autowired
     HouseService houseService;
 
+    @Autowired
+    ResidenceService residenceService;
+    
     @GetMapping("/{residence_id}/house/{id}")
     public ResponseEntity<Object> findHouseById(@PathVariable("residence_id") Long residenceId,@PathVariable("id") Long id) {
       
@@ -40,4 +46,13 @@ public class ResidenceController {
         
         return ResponseEntity.ok().body(newHouse);
     }
+
+    @GetMapping()
+    public ResponseEntity<Object> findResidences() {
+      
+        List<Residence> residencesFound = this.residenceService.getResidences();
+        if(residencesFound.size() == 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residences not found");
+        return ResponseEntity.ok().body(residencesFound);
+    }
+
 }

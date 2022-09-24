@@ -33,7 +33,7 @@ public class HouseService {
         return queryResponse;
       
     }
-    public House createHouse(HouseDTO houseData, Long residenceId) {
+    public House createHouse(com.residence.api.dataTranferObjects.HouseDTO houseData, Long residenceId) {
    
         House newHouse = new House();
         Optional<Residence> residenceFound = this.residenceRepository.findById(residenceId);
