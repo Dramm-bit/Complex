@@ -8,10 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.residence.api.dtos.HouseDTO;
 import com.residence.api.models.House;
 import com.residence.api.services.HouseService;
 
@@ -27,5 +31,13 @@ public class ResidenceController {
         House houseFound = this.houseService.getHouseById(id, residenceId);
         
         return ResponseEntity.ok().body(houseFound);
+    }
+
+    @PostMapping("/{residence_id}")
+    public ResponseEntity<Object> createHouse(@RequestBody() HouseDTO houseData, @PathVariable("residence_id") Long residenceId) {
+      
+        House newHouse = this.houseService.createHouse(houseData, residenceId);
+        
+        return ResponseEntity.ok().body(newHouse);
     }
 }
