@@ -17,14 +17,21 @@ public class ResidenceService {
     @Autowired
     private ResidenceRepository residenceRepository;
 
-   /*  public Set<House> findResidenceById(Long id) {
+    /*
+     * public Set<House> findResidenceById(Long id) {
+     * 
+     * List<House> finded = new ArrayList<>();
+     * Optional<Residence> copy = residenceRepository.findById(id);// hacer una
+     * exepcion que se encargue de dar una respuesta si no se encuentra el id
+     * copy.get().getHouses().forEach(finded::add);
+     * return finded;
+     * 
+     * }
+     */
 
-        List<House> finded = new ArrayList<>();
-        Optional<Residence> copy = residenceRepository.findById(id);// hacer una exepcion que se encargue de dar una respuesta si no se encuentra el id
-        copy.get().getHouses().forEach(finded::add);
-        return finded;
+  }
 
-    } */
-
-  
-}
+    public List<Residence> getResidences() {
+        
+        return this.residenceRepository.findAll();
+    }
