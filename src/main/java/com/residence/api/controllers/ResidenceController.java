@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +54,16 @@ public class ResidenceController {
         List<Residence> residencesFound = this.residenceService.getResidences();
         if(residencesFound.size() == 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residences not found");
         return ResponseEntity.ok().body(residencesFound);
+    }
+
+
+    @DeleteMapping("/{residence_id}/house/{id}")
+    public ResponseEntity<Object> findAndDeleteHouse(@PathVariable("residence_id") Long residenceId,@PathVariable("id") Long id) {
+      
+        Long houseIdDeleted = this.houseService.findAndDelete(id, residenceId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "House with id "+ houseIdDeleted + " deleted successfully");
+        return ResponseEntity.ok().body(response);
     }
 
 }
