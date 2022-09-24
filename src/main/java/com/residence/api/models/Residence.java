@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -26,7 +28,8 @@ public class Residence {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
-
+    
+    @JsonIgnore()
     @OneToMany(mappedBy = "residence")
     private Set<House> house;
 
