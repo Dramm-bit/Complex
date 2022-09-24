@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.residence.api.dataTranferObjects.HouseDTO;
+import com.residence.api.dataTranferObjects.ResidenceDTO;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.residence.api.dataTranferObjects.HouseDTO;
 import com.residence.api.models.House;
 import com.residence.api.models.Residence;
 import com.residence.api.services.HouseService;
@@ -27,43 +29,55 @@ import com.residence.api.services.ResidenceService;
 @RequestMapping("/api/v1/residences")
 public class ResidenceController {
     @Autowired
-    HouseService houseService;
+    private HouseService houseService;
 
     @Autowired
-    ResidenceService residenceService;
-    
+    private ResidenceService residenceService;
+
     @GetMapping("/{residence_id}/house/{id}")
-    public ResponseEntity<Object> findHouseById(@PathVariable("residence_id") Long residenceId,@PathVariable("id") Long id) {
-      
+    public ResponseEntity<Object> findHouseById(@PathVariable("residence_id") Long residenceId,
+            @PathVariable("id") Long id) {
+
         House houseFound = this.houseService.getHouseById(id, residenceId);
-        
+
         return ResponseEntity.ok().body(houseFound);
     }
 
     @PostMapping("/{residence_id}")
-    public ResponseEntity<Object> createHouse(@RequestBody() HouseDTO houseData, @PathVariable("residence_id") Long residenceId) {
-      
+    public ResponseEntity<Object> createHouse(@RequestBody() HouseDTO houseData,
+            @PathVariable("residence_id") Long residenceId) {
+
         House newHouse = this.houseService.createHouse(houseData, residenceId);
-        
+
         return ResponseEntity.ok().body(newHouse);
     }
 
     @GetMapping()
     public ResponseEntity<Object> findResidences() {
-      
+
         List<Residence> residencesFound = this.residenceService.getResidences();
-        if(residencesFound.size() == 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residences not found");
+        if (residencesFound.size() == 0)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residences not found");
         return ResponseEntity.ok().body(residencesFound);
     }
 
-
     @DeleteMapping("/{residence_id}/house/{id}")
-    public ResponseEntity<Object> findAndDeleteHouse(@PathVariable("residence_id") Long residenceId,@PathVariable("id") Long id) {
-      
+    public ResponseEntity<Object> findAndDeleteHouse(@PathVariable("residence_id") Long residenceId,
+            @PathVariable("id") Long id) {
+
         Long houseIdDeleted = this.houseService.findAndDelete(id, residenceId);
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "House with id "+ houseIdDeleted + " deleted successfully");
+        response.put("message", "House with id " + houseIdDeleted + " deleted successfully");
         return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<Residence> createResidence(@RequestBody() ResidenceDTO residenceData) {
+
+        Residence newResidence = this.residenceService.createResidence(residenceData);
+
+        return ResponseEntity.ok().body(newResidence);
+
     }
 
 }

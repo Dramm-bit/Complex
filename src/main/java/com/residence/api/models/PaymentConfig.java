@@ -17,13 +17,14 @@ import lombok.Data;
 @Data
 public class PaymentConfig {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @OneToMany(mappedBy = "paymentConfig")
-    private Set<Payment> payment;
+    private Set<Payment> payments;
 
     @OneToOne(mappedBy = "paymentConfig")
     private Residence residence;
 
+    private Double amount;
 }
