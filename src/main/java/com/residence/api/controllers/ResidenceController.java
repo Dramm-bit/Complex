@@ -82,9 +82,18 @@ public class ResidenceController {
     }
     @GetMapping("/{residence_id}/house")
     public ResponseEntity<Set<House>> ListHousesByResidenceId (@PathVariable ("residence_id") Long residenceId){
-        Set<House> finded = residenceService.findResidenceById(residenceId); 
+        Set<House> finded = residenceService.findHousesinResidenceById(residenceId); 
 
         return ResponseEntity.ok().body(finded);
+    }
+
+    @DeleteMapping("/{residence_id}")
+    public ResponseEntity<Object> deleteAllHousesByResidence(@PathVariable("residence_id") Long residenceId){
+        this.residenceService.deleteAllHousesByResidence(residenceId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Houses of residence with id " + residenceId + " deleted successfully");
+        return ResponseEntity.ok().body(response);
+        
     }
 
 }

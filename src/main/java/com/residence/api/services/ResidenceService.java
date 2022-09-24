@@ -60,10 +60,14 @@ public class ResidenceService {
     }
 
 
-  
+  public Optional<Residence> getResidenceById(Long id) {
+    Optional<Residence> copy = residenceRepository.findById(id); 
+           if(!copy.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residences not found");
+           return copy;
+  }
 
 
-    public Set<House> findResidenceById(Long id) {
+    public Set<House> findHousesinResidenceById(Long id) {
 
        
         Optional<Residence> copy = residenceRepository.findById(id);
@@ -72,9 +76,19 @@ public class ResidenceService {
             return finded;
           
         }
-       
+        
+        public void deleteAllHousesByResidence(Long id){
+            Optional <Residence> residenceFinded =this.getResidenceById(id);
+            residenceFinded.ifPresent(residence -> residenceRepository.deleteById(residence.getId()));
+                                                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residences not found");   
+            
+            
+          
+        }
 
     }
+
+    
 
 
   
