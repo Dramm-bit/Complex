@@ -21,7 +21,7 @@ public class PaymentConfig {
     private long id;
 
     @OneToMany(mappedBy = "paymentConfig")
-    private Set<Payment> payment;
+    private Set<Payment> payments;
 
     @OneToOne(mappedBy = "paymentConfig")
     private Residence residence;

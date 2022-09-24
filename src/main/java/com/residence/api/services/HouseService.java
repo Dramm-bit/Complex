@@ -37,6 +37,7 @@ public class HouseService {
    
         House newHouse = new House();
         Optional<Residence> residenceFound = this.residenceRepository.findById(residenceId);
+        
         if(residenceFound.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residence not found");
         newHouse.setResidence(residenceFound.get());
         newHouse.setTower(houseData.getTower());

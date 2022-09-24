@@ -3,6 +3,8 @@ package com.residence.api.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +19,16 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.residence.api.dtos.HouseDTO;
 import com.residence.api.models.House;
+import com.residence.api.models.Residence;
 import com.residence.api.services.HouseService;
 
 @RestController
 @RequestMapping("/api/v1/residences")
 public class ResidenceController {
     @Autowired
-    HouseService houseService;
+   private final HouseService houseService;
+   
+
 
     @GetMapping("/{residence_id}/house/{id}")
     public ResponseEntity<Object> findHouseById(@PathVariable("residence_id") Long residenceId,@PathVariable("id") Long id) {
@@ -40,4 +45,23 @@ public class ResidenceController {
         
         return ResponseEntity.ok().body(newHouse);
     }
+
+    
+    @PostMapping
+public ResponseEntity<Residence> create(@Valid @RequestBody Residence residence){
+    Residence newHouse = residenceService.create(residence);
+   
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+        .path("/{id}")
+        .buildAndExpand(newHouse.getId())
+        .toUri();
+    return ResponseEntity.created(location).body(newHouse);
+}
+ 
+    
+    
+
+   
+}
+ 
 }

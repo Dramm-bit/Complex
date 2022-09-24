@@ -14,16 +14,20 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Builder;
 import lombok.Data;
+
 
 @Entity
 @Table(name = "residences")
 @Data
+@Builder
 public class Residence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String address;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_config_id")
@@ -31,9 +35,9 @@ public class Residence {
 
     @JsonIgnore()
     @OneToMany(mappedBy = "residence")
-    private Set<House> house;
+    private Set<House> houses;
 
     private String name;
     
-    private String address;
+    
 }
