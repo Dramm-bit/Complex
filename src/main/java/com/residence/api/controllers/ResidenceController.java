@@ -3,6 +3,7 @@ package com.residence.api.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,6 +79,12 @@ public class ResidenceController {
 
         return ResponseEntity.ok().body(newResidence);
 
+    }
+    @GetMapping("/{residence_id}/house")
+    public ResponseEntity<Set<House>> ListHousesByResidenceId (@PathVariable ("residence_id") Long residenceId){
+        Set<House> finded = residenceService.findResidenceById(residenceId); 
+
+        return ResponseEntity.ok().body(finded);
     }
 
 }

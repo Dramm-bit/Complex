@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import com.residence.api.models.Residence;
 @Repository
 public interface ResidenceRepository extends JpaRepository<Residence, Long>{
- 
+    Residence findHouseById(Long id);
 }
