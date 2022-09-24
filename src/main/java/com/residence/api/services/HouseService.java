@@ -45,6 +45,15 @@ public class HouseService {
         return newHouse;
       
     }
+
+    public Long findAndDelete(Long id, Long residenceId) {
+   
+        House houseFound = this.getHouseById(id, residenceId);
+        this.houseRepository.deleteById(houseFound.getId());
+
+        return id;
+      
+    }
         
     
 }
