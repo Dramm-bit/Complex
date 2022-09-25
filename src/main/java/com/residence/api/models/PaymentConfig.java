@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -23,6 +25,7 @@ public class PaymentConfig {
     @OneToMany(mappedBy = "paymentConfig")
     private Set<Payment> payments;
 
+    @JsonIgnore()
     @OneToOne(mappedBy = "paymentConfig")
     private Residence residence;
 

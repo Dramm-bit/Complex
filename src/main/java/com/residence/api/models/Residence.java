@@ -36,7 +36,7 @@ public class Residence {
     private Set<House> houses;
 
     private String name;
-
+    private Double amount;
     
     
     
