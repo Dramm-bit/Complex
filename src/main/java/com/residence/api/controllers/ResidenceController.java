@@ -3,6 +3,7 @@ package com.residence.api.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -39,7 +41,7 @@ public class ResidenceController {
     public ResponseEntity<Object> findHouseById(@PathVariable("residence_id") Long residenceId,
             @PathVariable("id") Long id) {
 
-        House houseFound = this.houseService.getHouseById(id, residenceId);
+        Optional<House> houseFound = this.houseService.getHouseById(id, residenceId);
 
         return ResponseEntity.ok().body(houseFound);
     }
@@ -95,5 +97,11 @@ public class ResidenceController {
         return ResponseEntity.ok().body(response);
         
     }
-
+    @PutMapping("/{residence_id}/house/{id}")
+    public ResponseEntity<Object> updateHouseBySpecificResidence(@RequestBody() HouseDTO houseData,
+                                                                @PathVariable("residence_id") Long residenceId,
+                                                                @PathVariable("id") Long id){
+    Optional<House> updatedHouse = this.houseService.updateHouseBySpecificResidence(id, residenceId, houseData);
+    return ResponseEntity.ok().body(updatedHouse);
+}
 }

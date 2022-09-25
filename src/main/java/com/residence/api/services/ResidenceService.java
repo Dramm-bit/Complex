@@ -26,19 +26,6 @@ public class ResidenceService {
 
     @Autowired
     private HouseRepository houseRepository;
-
-    /*
-     * public Set<House> findResidenceById(Long id) {
-     * 
-     * List<House> finded = new ArrayList<>();
-     * Optional<Residence> copy = residenceRepository.findById(id);// hacer una
-     * exepcion que se encargue de dar una respuesta si no se encuentra el id
-     * copy.get().getHouses().forEach(finded::add);
-     * return finded;
-     * 
-     * }
-     */
-
      
     public List<Residence> getResidences() {
         

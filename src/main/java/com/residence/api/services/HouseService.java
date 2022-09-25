@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.residence.api.models.House;
 import com.residence.api.models.Residence;
 import com.residence.api.repositories.HouseRepository;
+import com.residence.api.dataTranferObjects.HouseDTO;
 import com.residence.api.repositories.ResidenceRepository;
 
 @Service
@@ -25,15 +26,15 @@ public class HouseService {
     @Autowired
     private ResidenceRepository residenceRepository;
 
-    public House getHouseById(Long id, Long residenceId) {
+    public Optional<House> getHouseById(Long id, Long residenceId) {
    
             
-        House queryResponse = this.houseRepository.findHouseByIdAndResidenceId(id, residenceId);
-        if(queryResponse == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "House not found");
+       Optional<House> queryResponse = this.houseRepository.findHouseByIdAndResidenceId(id, residenceId);
+        if(queryResponse.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "House not found");
         return queryResponse;
       
     }
-    public House createHouse(com.residence.api.dataTranferObjects.HouseDTO houseData, Long residenceId) {
+    public House createHouse(HouseDTO houseData, Long residenceId) {
    
         House newHouse = new House();
         Optional<Residence> residenceFound = this.residenceRepository.findById(residenceId);
@@ -49,12 +50,23 @@ public class HouseService {
 
     public Long findAndDelete(Long id, Long residenceId) {
    
-        House houseFound = this.getHouseById(id, residenceId);
-        this.houseRepository.deleteById(houseFound.getId());
+        Optional<House> houseFound = this.getHouseById(id, residenceId);
+        houseFound.ifPresent(house ->this.houseRepository.deleteById(house.getId()));
 
         return id;
       
     }
+
+   public Optional <House> updateHouseBySpecificResidence (Long id, Long residenceId, HouseDTO houseData){
+        Optional <House> updatedHouse = this.getHouseById(id, residenceId);
+        updatedHouse.ifPresent(update -> {
+            
+            update.setTower(houseData.getTower());
+
+        });
+
+        return updatedHouse;
+   }
         
     
 }

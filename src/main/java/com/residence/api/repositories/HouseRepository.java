@@ -3,6 +3,7 @@ package com.residence.api.repositories;
 
 
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,6 @@ import com.residence.api.models.House;
 
 public interface HouseRepository extends JpaRepository<House, Long> {
     
-    House findHouseByIdAndResidenceId( Long id,Long residenceId);
+    Optional<House> findHouseByIdAndResidenceId( Long id,Long residenceId);
    Set<House> findHouseByresidence_idIs(Long id);
 }
