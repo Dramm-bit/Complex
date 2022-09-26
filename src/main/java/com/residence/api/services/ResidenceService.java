@@ -35,7 +35,6 @@ public class ResidenceService {
 
         paymentConfig.setAmount(residenceData.getAmount());
 
-        newResidence.setAmount(residenceData.getAmount());
         newResidence.setPaymentConfig(paymentConfig);
         newResidence.setAddress(residenceData.getAddress());
         newResidence.setName(residenceData.getName());

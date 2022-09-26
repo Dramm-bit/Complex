@@ -35,6 +35,7 @@ public class ResidenceController {
 
     @Autowired
     private ResidenceService residenceService;
+ 
 
     @GetMapping("/{residence_id}/house/{id}")
     public ResponseEntity<Object> findHouseById(@PathVariable("residence_id") Long residenceId,
@@ -51,7 +52,7 @@ public class ResidenceController {
 
         House newHouse = this.houseService.createHouse(houseData, residenceId);
 
-        return ResponseEntity.ok().body(newHouse);
+        return ResponseEntity.status(201).body(newHouse);
     }
 
     @GetMapping()
@@ -78,7 +79,7 @@ public class ResidenceController {
 
         Residence newResidence = this.residenceService.createResidence(residenceData);
 
-        return ResponseEntity.ok().body(newResidence);
+        return ResponseEntity.status(201).body(newResidence);
 
     }
     @GetMapping("/{residence_id}/houses")
@@ -100,4 +101,5 @@ public class ResidenceController {
         Residence residenceUpdated = this.residenceService.updateResidence(residenceData,id);
         return ResponseEntity.ok().body(residenceUpdated);
     }
+
 }

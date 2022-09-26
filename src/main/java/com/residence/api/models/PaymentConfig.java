@@ -23,7 +23,7 @@ public class PaymentConfig {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //@JsonIgnore()
+    @JsonIgnore()
     @OneToMany(mappedBy = "paymentConfig")
     private Set<Payment> payments;
 

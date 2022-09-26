@@ -32,7 +32,6 @@ public class Payment {
     private House house;
 
     @ManyToOne()
-    @JsonIgnore()
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
 
