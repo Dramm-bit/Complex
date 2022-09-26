@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,10 +29,11 @@ public class Residence {
     private String address;
 
     @OneToOne(cascade = CascadeType.ALL)
+   
+    @JsonIgnore()
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
 
-    @JsonIgnore()
     @OneToMany(mappedBy = "residence")
     private Set<House> houses;
 
