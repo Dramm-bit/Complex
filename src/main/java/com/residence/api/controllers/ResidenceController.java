@@ -79,9 +79,9 @@ public class ResidenceController {
         return ResponseEntity.ok().body(newResidence);
 
     }
-    @GetMapping("/{residence_id}")
+    @GetMapping("/{residence_id}/houses")
     public ResponseEntity<Object> findResidence(@PathVariable("residence_id") Long id) {
-        Residence residencesFound = this.residenceService.getResidenceById(id);
+        List<House> residencesFound = this.houseService.findHousesinResidenceById(id);
         return ResponseEntity.ok().body(residencesFound);
     }
 }

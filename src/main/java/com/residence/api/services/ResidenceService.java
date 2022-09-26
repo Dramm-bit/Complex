@@ -2,6 +2,7 @@ package com.residence.api.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,10 +41,7 @@ public class ResidenceService {
         return newResidence;
     }
 
-    public Residence getResidenceById(Long id) {
-        Optional<Residence> residenceFound = this.residenceRepository.findById(id); 
-        if(residenceFound.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residence not found");
-        return residenceFound.get();
-    }
+  
+
 
 }

@@ -1,6 +1,7 @@
 package com.residence.api.models;
 
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +22,8 @@ public class House {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     
-    @ManyToOne()
     @JsonIgnore()
+    @ManyToOne()
     @JoinColumn(name = "residence_id")
     private Residence residence;
     
