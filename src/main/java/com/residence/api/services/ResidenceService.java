@@ -58,7 +58,21 @@ public class ResidenceService {
 
         return residenceUpdated;
     }
+    public Residence getResidenceById(Long id) {
+        Optional<Residence> residenceFound = this.residenceRepository.findById(id); 
+        if(residenceFound.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residence not found");
+        return residenceFound.get();
+    }
   
+    public Long delete(Long id){
+        Residence residenceFinded =this.getResidenceById(id);
+        this.residenceRepository.deleteById(residenceFinded.getId());
+
+         return id;                       
+        
+        
+      
+    }
 
 
 }

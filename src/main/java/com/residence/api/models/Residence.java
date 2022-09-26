@@ -34,7 +34,7 @@ public class Residence {
     private PaymentConfig paymentConfig;
     
     @JsonIgnore()
-    @OneToMany(mappedBy = "residence")
+    @OneToMany(mappedBy = "residence",cascade = CascadeType.REMOVE)
     private Set<House> houses;
 
     private String name;

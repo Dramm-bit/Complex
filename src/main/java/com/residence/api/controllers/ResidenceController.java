@@ -102,4 +102,12 @@ public class ResidenceController {
         return ResponseEntity.ok().body(residenceUpdated);
     }
 
+    @DeleteMapping("/{residence_id}")
+    public ResponseEntity<Object> deleteResidence(@PathVariable("residence_id") Long residenceId){
+        this.residenceService.delete(residenceId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Houses of residence with id " + residenceId + " was delete successfully");
+        return ResponseEntity.ok().body(response);
+        
+    }
 }
