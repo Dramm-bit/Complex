@@ -24,6 +24,7 @@ public class ResidenceService {
 
         return this.residenceRepository.findAll();
     }
+    
 
     public Residence createResidence(ResidenceDTO residenceData) {
         if(residenceData.getAmount() == null || residenceData.getAddress() == null || residenceData.getName() == null) {
@@ -34,11 +35,11 @@ public class ResidenceService {
         PaymentConfig paymentConfig = new PaymentConfig();
 
         paymentConfig.setAmount(residenceData.getAmount());
-
+        
         newResidence.setPaymentConfig(paymentConfig);
         newResidence.setAddress(residenceData.getAddress());
         newResidence.setName(residenceData.getName());
-        newResidence.setPaymentConfig(newResidence.getPaymentConfig());
+       // newResidence.setPaymentConfig(newResidence.getPaymentConfig());
         newResidence = this.residenceRepository.save(newResidence);
         return newResidence;
     }
