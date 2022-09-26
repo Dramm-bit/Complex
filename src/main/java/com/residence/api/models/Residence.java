@@ -28,12 +28,12 @@ public class Residence {
 
     private String address;
 
-    @OneToOne(cascade = CascadeType.ALL)
-   
     @JsonIgnore()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
-
+    
+    @JsonIgnore()
     @OneToMany(mappedBy = "residence")
     private Set<House> houses;
 

@@ -94,4 +94,10 @@ public class ResidenceController {
     House updatedHouse = this.houseService.updateHouseBySpecificResidence(id, residenceId, houseData);
     return ResponseEntity.ok().body(updatedHouse);
 }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Residence> updateResidence(@PathVariable("id") Long id, @RequestBody ResidenceDTO residenceData) {
+        Residence residenceUpdated = this.residenceService.updateResidence(residenceData,id);
+        return ResponseEntity.ok().body(residenceUpdated);
+    }
 }
