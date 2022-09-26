@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,14 +12,24 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
+
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 @Entity
 @Table(name = "residences")
-@Data
+
 public class Residence {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,16 +37,18 @@ public class Residence {
 
     private String address;
 
-    @JsonIgnore()
+  
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
     
-    @JsonIgnore()
-    @OneToMany(mappedBy = "residence")
+    @OneToMany(mappedBy = "residence",cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private Set<House> houses;
 
     private String name;
+    
+    
 
     
 }

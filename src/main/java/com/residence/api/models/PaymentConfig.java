@@ -11,23 +11,33 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "payments_config")
-@Data
+
 public class PaymentConfig {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @JsonIgnore()
     @OneToMany(mappedBy = "paymentConfig")
+    @JsonManagedReference
     private Set<Payment> payments;
 
-    @JsonIgnore()
+    
     @OneToOne(mappedBy = "paymentConfig")
     private Residence residence;
 

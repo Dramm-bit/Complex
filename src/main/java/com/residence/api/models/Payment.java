@@ -11,13 +11,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import lombok.Data;
+
+
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 @Entity
 @Table(name = "payments")
-@Data
+
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +37,12 @@ public class Payment {
     private StatePayment status;
 
     @ManyToOne()
-    @JsonIgnore()
+    @JsonBackReference
     @JoinColumn(name = "house_id")
     private House house;
 
     @ManyToOne()
+    @JsonBackReference
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
 

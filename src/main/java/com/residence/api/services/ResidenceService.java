@@ -24,6 +24,7 @@ public class ResidenceService {
 
         return this.residenceRepository.findAll();
     }
+    
 
     public Residence createResidence(ResidenceDTO residenceData) {
         if(residenceData.getAmount() == null || residenceData.getAddress() == null || residenceData.getName() == null) {
@@ -34,11 +35,11 @@ public class ResidenceService {
         PaymentConfig paymentConfig = new PaymentConfig();
 
         paymentConfig.setAmount(residenceData.getAmount());
-
+        
         newResidence.setPaymentConfig(paymentConfig);
         newResidence.setAddress(residenceData.getAddress());
         newResidence.setName(residenceData.getName());
-        newResidence.setPaymentConfig(newResidence.getPaymentConfig());
+       // newResidence.setPaymentConfig(newResidence.getPaymentConfig());
         newResidence = this.residenceRepository.save(newResidence);
         return newResidence;
     }
@@ -58,7 +59,21 @@ public class ResidenceService {
 
         return residenceUpdated;
     }
+    public Residence getResidenceById(Long id) {
+        Optional<Residence> residenceFound = this.residenceRepository.findById(id); 
+        if(residenceFound.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residence not found");
+        return residenceFound.get();
+    }
   
+    public Long delete(Long id){
+        Residence residenceFinded =this.getResidenceById(id);
+        this.residenceRepository.deleteById(residenceFinded.getId());
+
+         return id;                       
+        
+        
+      
+    }
 
 
 }
