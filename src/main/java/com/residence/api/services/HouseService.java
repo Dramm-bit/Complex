@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.residence.api.dataTranferObjects.HouseDTO;
 import com.residence.api.models.House;
 import com.residence.api.models.Residence;
 import com.residence.api.repositories.HouseRepository;
@@ -32,7 +33,7 @@ public class HouseService {
 
     }
 
-    public House createHouse(com.residence.api.dataTranferObjects.HouseDTO houseData, Long residenceId) {
+    public House createHouse(HouseDTO houseData, Long residenceId) {
 
         House newHouse = new House();
         Optional<Residence> residenceFound = this.residenceRepository.findById(residenceId);
