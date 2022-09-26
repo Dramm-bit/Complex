@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -25,10 +27,12 @@ public class Payment {
     private StatePayment status;
 
     @ManyToOne()
+    @JsonIgnore()
     @JoinColumn(name = "house_id")
     private House house;
 
     @ManyToOne()
+    @JsonIgnore()
     @JoinColumn(name = "payment_config_id")
     private PaymentConfig paymentConfig;
 

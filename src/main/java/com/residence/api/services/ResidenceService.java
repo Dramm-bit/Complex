@@ -2,7 +2,7 @@ package com.residence.api.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +26,9 @@ public class ResidenceService {
     }
 
     public Residence createResidence(ResidenceDTO residenceData) {
+        if(residenceData.getAmount() == null || residenceData.getAddress() == null || residenceData.getName() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name, Address and Amount properties are required.");
+        }
         Residence newResidence = new Residence();
 
         PaymentConfig paymentConfig = new PaymentConfig();
@@ -40,7 +43,22 @@ public class ResidenceService {
         newResidence = this.residenceRepository.save(newResidence);
         return newResidence;
     }
+    public Residence updateResidence(ResidenceDTO residenceData, Long id) {
+        Optional<Residence> queryResponse = this.residenceRepository.findById(id);
+        if(queryResponse.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Residences not found");
+        
+        Residence residenceFound = queryResponse.get();
+        if(residenceData.getAmount() != null) {
+            
+            residenceFound.getPaymentConfig().setAmount(residenceData.getAmount());
+        }
+        if(residenceData.getName() != null && !residenceData.getName().isBlank())  residenceFound.setName(residenceData.getName());
+        if(residenceData.getAddress() != null && !residenceData.getAddress().isBlank())  residenceFound.setAddress(residenceData.getAddress());
+       
+        Residence residenceUpdated = this.residenceRepository.save(residenceFound);
 
+        return residenceUpdated;
+    }
   
 
 
