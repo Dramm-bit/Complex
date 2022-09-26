@@ -47,6 +47,15 @@ public class HouseService {
         return newHouse;
 
     }
+    public House updateHouseBySpecificResidence (Long id, Long residenceId, HouseDTO houseData){
+        House updatedHouse = this.getHouseById(id, residenceId);
+        if(updatedHouse == null)  throw new ResponseStatusException(HttpStatus.NOT_FOUND, "House not found");
+        updatedHouse.setTower(houseData.getTower());
+        updatedHouse = this.houseRepository.save(updatedHouse);
+        
+        
+        return updatedHouse;
+   }
 
     public Long findAndDelete(Long id, Long residenceId) {
 
@@ -67,4 +76,5 @@ public class HouseService {
 
     }
 
+  
 }

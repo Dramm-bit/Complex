@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,6 +86,14 @@ public class ResidenceController {
         List<House> residencesFound = this.houseService.findHousesinResidenceById(id);
         return ResponseEntity.ok().body(residencesFound);
     }
+    
+    @PutMapping("/{residence_id}/house/{id}")
+    public ResponseEntity<Object> updateHouseBySpecificResidence(@RequestBody() HouseDTO houseData,
+                                                                @PathVariable("residence_id") Long residenceId,
+                                                                @PathVariable("id") Long id){
+    House updatedHouse = this.houseService.updateHouseBySpecificResidence(id, residenceId, houseData);
+    return ResponseEntity.ok().body(updatedHouse);
+}
 
     @PutMapping("/{id}")
     public ResponseEntity<Residence> updateResidence(@PathVariable("id") Long id, @RequestBody ResidenceDTO residenceData) {
