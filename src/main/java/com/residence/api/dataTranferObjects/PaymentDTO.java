@@ -5,7 +5,6 @@ import com.residence.api.models.StatePayment;
 import lombok.Data;
 
 @Data
-public class HouseDTO {
-    String tower;
-    StatePayment status = StatePayment.NORMAL;
+public class PaymentDTO {
+       StatePayment status = StatePayment.NORMAL;
 }
