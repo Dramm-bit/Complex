@@ -44,7 +44,6 @@ In this project I had to remember different concepts that I took for granted, so
 
 ### Useful resources
 
-- [Resources]
 - [https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/]
 - [https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods]
 - [https://www.youtube.com/watch?v=GaCBrMvgY2A]
