@@ -1,6 +1,6 @@
 package com.residence.api.models.permisses;
 
-// import java.util.Set;
+
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-// import javax.persistence.ManyToMany;
+
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -29,9 +29,6 @@ public class Role {
     
     @Enumerated(EnumType.STRING)
     private TypeRole name;
-
-    // @ManyToMany(mappedBy="roles")
-    // private Set<User> users;
 
     public Role(TypeRole name) {
         this.name = name;

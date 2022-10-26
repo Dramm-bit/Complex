@@ -14,7 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
+// import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,10 +26,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-@Table(name="user", uniqueConstraints = {
-                    @UniqueConstraint (columnNames={"username"})
-                  
-})
+@Table(name="info_user", 
+uniqueConstraints = { 
+    @UniqueConstraint(columnNames = "username")})
+                 
 
 
 public class User {
@@ -36,6 +38,7 @@ public class User {
     private Long id;
 
     @Email  
+    @Size(max = 50)
     private String username; //el username sera tratado como el correo
 
     private String password;

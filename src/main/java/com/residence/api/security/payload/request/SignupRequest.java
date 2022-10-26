@@ -6,7 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.residence.api.models.permisses.Role;
+// import com.residence.api.models.permisses.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
