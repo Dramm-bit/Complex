@@ -40,7 +40,7 @@ This is the mode that we decide work the relations between the differents entiti
 
 ### What I learned
 
-In this project I had to remember different concepts that I took for granted, so well I got into this and tried my best, I had never worked with Spring so this put me in a little trouble but with help I was able to overcome it, I guess working 100% virtually with my partner via github gave me a better handle on this, I also learned how important it is to know SQL queries.
+ In this project I had to remember different concepts that I took for granted, so well I got into this and tried my best, I had never worked with Spring so this put me in a little trouble but with help I was able to overcome it, I guess working 100% virtually with my partner via github gave me a better handle on this, I also learned how important it is to know SQL queries.
 
 ### Useful resources
 

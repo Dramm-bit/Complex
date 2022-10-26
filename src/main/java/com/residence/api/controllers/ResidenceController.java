@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +35,8 @@ public class ResidenceController {
 
     @Autowired
     private ResidenceService residenceService;
- 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{residence_id}/house/{id}")
     public ResponseEntity<Object> findHouseById(@PathVariable("residence_id") Long residenceId,
             @PathVariable("id") Long id) {
@@ -46,6 +46,7 @@ public class ResidenceController {
         return ResponseEntity.ok().body(houseFound);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{residence_id}")
     public ResponseEntity<Object> createHouse(@RequestBody() HouseDTO houseData,
             @PathVariable("residence_id") Long residenceId) {
@@ -55,6 +56,7 @@ public class ResidenceController {
         return ResponseEntity.status(201).body(newHouse);
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping()
     public ResponseEntity<Object> findResidences() {
 
@@ -64,6 +66,7 @@ public class ResidenceController {
         return ResponseEntity.ok().body(residencesFound);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{residence_id}/house/{id}")
     public ResponseEntity<Object> findAndDeleteHouse(@PathVariable("residence_id") Long residenceId,
             @PathVariable("id") Long id) {
@@ -74,6 +77,7 @@ public class ResidenceController {
         return ResponseEntity.ok().body(response);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Residence> createResidence(@RequestBody() ResidenceDTO residenceData) {
 
@@ -82,32 +86,38 @@ public class ResidenceController {
         return ResponseEntity.status(201).body(newResidence);
 
     }
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/{residence_id}/houses")
     public ResponseEntity<Object> findResidence(@PathVariable("residence_id") Long id) {
         List<House> residencesFound = this.houseService.findHousesinResidenceById(id);
         return ResponseEntity.ok().body(residencesFound);
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{residence_id}/house/{id}")
     public ResponseEntity<Object> updateHouseBySpecificResidence(@RequestBody() HouseDTO houseData,
-                                                                @PathVariable("residence_id") Long residenceId,
-                                                                @PathVariable("id") Long id){
-    House updatedHouse = this.houseService.updateHouseBySpecificResidence(id, residenceId, houseData);
-    return ResponseEntity.ok().body(updatedHouse);
-}
+            @PathVariable("residence_id") Long residenceId,
+            @PathVariable("id") Long id) {
+        House updatedHouse = this.houseService.updateHouseBySpecificResidence(id, residenceId, houseData);
+        return ResponseEntity.ok().body(updatedHouse);
+    }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<Residence> updateResidence(@PathVariable("id") Long id, @RequestBody ResidenceDTO residenceData) {
-        Residence residenceUpdated = this.residenceService.updateResidence(residenceData,id);
+    public ResponseEntity<Residence> updateResidence(@PathVariable("id") Long id,
+            @RequestBody ResidenceDTO residenceData) {
+        Residence residenceUpdated = this.residenceService.updateResidence(residenceData, id);
         return ResponseEntity.ok().body(residenceUpdated);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{residence_id}")
-    public ResponseEntity<Object> deleteResidence(@PathVariable("residence_id") Long residenceId){
+    public ResponseEntity<Object> deleteResidence(@PathVariable("residence_id") Long residenceId) {
         this.residenceService.delete(residenceId);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Houses of residence with id " + residenceId + " was delete successfully");
         return ResponseEntity.ok().body(response);
-        
+
     }
 }
